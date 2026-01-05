@@ -8,7 +8,7 @@ import {
   Indent,
   convertInchesToTwip
 } from "docx";
-import FileSaver from "file-saver";
+import saveAs from "file-saver";
 import { BlockType, DocBlock } from "../types";
 
 // Standard Official Doc measurements
@@ -16,6 +16,7 @@ import { BlockType, DocBlock } from "../types";
 // 2hao (Title) = 22pt = 44 half-points
 // Line Height 28pt. In Docx, line spacing is in 240ths of a line. 
 // Or exact spacing in twips (1/20 pt). 28pt = 560 twips.
+// Indentation: 2 chars * 16pt = 32pt = 640 twips.
 
 const FONT_FANGSONG = "FangSong_GB2312"; // Primary Body
 const FONT_HEITI = "SimHei"; // Level 1
@@ -47,7 +48,7 @@ export const exportToWord = async (blocks: DocBlock[]) => {
       case BlockType.HEADING_1:
         paragraph = new Paragraph({
           alignment: AlignmentType.LEFT,
-          indent: { firstLine: 480 }, // 2 chars indentation approx
+          indent: { firstLine: 640 }, // 32pt (2 chars of 16pt font)
           spacing: { line: 560, lineRule: "exact" },
           children: [
             new TextRun({
@@ -62,7 +63,7 @@ export const exportToWord = async (blocks: DocBlock[]) => {
       case BlockType.HEADING_2:
         paragraph = new Paragraph({
           alignment: AlignmentType.LEFT,
-          indent: { firstLine: 480 },
+          indent: { firstLine: 640 },
           spacing: { line: 560, lineRule: "exact" },
           children: [
             new TextRun({
@@ -79,8 +80,8 @@ export const exportToWord = async (blocks: DocBlock[]) => {
         case BlockType.BODY:
         case BlockType.SUBTITLE:
             paragraph = new Paragraph({
-            alignment: AlignmentType.LEFT,
-            indent: { firstLine: 480 }, // Indent 2 chars (roughly 32pt * 2 chars width? typically 320-480 twips)
+            alignment: AlignmentType.LEFT, // Standard often uses Justified, but Left is safer for simple conversion
+            indent: { firstLine: 640 }, // 32pt
             spacing: { line: 560, lineRule: "exact" },
             children: [
                 new TextRun({
@@ -96,7 +97,7 @@ export const exportToWord = async (blocks: DocBlock[]) => {
         // Needs extra spacing before
         paragraph = new Paragraph({
           alignment: AlignmentType.LEFT,
-          indent: { firstLine: 480 },
+          indent: { firstLine: 640 },
           spacing: { before: 560, line: 560, lineRule: "exact" }, 
           children: [
             new TextRun({
@@ -112,7 +113,7 @@ export const exportToWord = async (blocks: DocBlock[]) => {
       case BlockType.DATE:
         paragraph = new Paragraph({
           alignment: AlignmentType.RIGHT,
-          indent: { right: 480 }, // Padding from right
+          indent: { right: 640 }, // Padding from right 2 chars
           spacing: { line: 560, lineRule: "exact" },
           children: [
             new TextRun({
@@ -152,5 +153,5 @@ export const exportToWord = async (blocks: DocBlock[]) => {
   });
 
   const blob = await Packer.toBlob(doc);
-  FileSaver.saveAs(blob, "公文排版.docx");
+  saveAs(blob, "公文排版.docx");
 };
