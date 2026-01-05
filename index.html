@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>公文自动排版系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Fallback font definitions to ensure best match for Official Doc standards */
+      @font-face {
+        font-family: 'Gongwen-Title';
+        src: local('FZXiaoBiaoSong-B05S'), local('方正小标宋简体'), local('SimSun'), local('宋体');
+      }
+      @font-face {
+        font-family: 'Gongwen-Hei';
+        src: local('SimHei'), local('黑体'), sans-serif;
+      }
+      @font-face {
+        font-family: 'Gongwen-Kai';
+        src: local('KaiTi_GB2312'), local('KaiTi'), local('楷体'), serif;
+      }
+      @font-face {
+        font-family: 'Gongwen-Fang';
+        src: local('FangSong_GB2312'), local('FangSong'), local('仿宋'), local('STFangsong'), serif;
+      }
+      
+      /* Print simulation */
+      .a4-paper {
+        width: 210mm;
+        min-height: 297mm;
+        background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 37mm 26mm 35mm 28mm; /* Top 3.7, Bottom 3.5, Right 2.6, Left 2.8 */
+        margin: 0 auto;
+        overflow-wrap: break-word;
+      }
+
+      /* Screen specific adjustments */
+      @media screen {
+        .a4-paper {
+          transform-origin: top center;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "docx": "https://esm.sh/docx@^9.5.1",
+    "file-saver": "https://esm.sh/file-saver@^2.0.5"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-100 text-gray-800 h-screen overflow-hidden">
+    <div id="root"></div>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "name": "Gongwen Auto-Formatter",
+  "description": "An automatic formatting tool for Chinese official documents (公文) with instant preview and Word (.docx) export capabilities.",
+  "requestFramePermissions": []
+}
