@@ -3,9 +3,7 @@ import {
   Packer, 
   Paragraph, 
   TextRun, 
-  AlignmentType, 
-  HeadingLevel,
-  Indent,
+  AlignmentType,
   convertInchesToTwip
 } from "docx";
 import saveAs from "file-saver";

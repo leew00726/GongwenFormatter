@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { ICONS, SAMPLE_TEXT } from './constants';
 import { parseTextToBlocks } from './services/formatter';
 import { exportToWord } from './services/exporter';
@@ -10,7 +10,7 @@ const { FileText, Wand2, Download, Eraser } = ICONS;
 function App() {
   const [rawText, setRawText] = useState<string>('');
   const [blocks, setBlocks] = useState<DocBlock[]>([]);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen] = useState(true);
 
   // Auto-format handler
   const handleAutoFormat = useCallback(() => {
